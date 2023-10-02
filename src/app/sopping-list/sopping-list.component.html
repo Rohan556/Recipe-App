@@ -1,10 +1,16 @@
 <div class="row">
   <div class="col-xs-10">
-    <app-shopping-edit></app-shopping-edit>
+    <app-shopping-edit 
+      (formEdit)="formInput($event)" 
+      [shoppingList]="ingredients" 
+      (updatedIngredient)="updateIngredient($event)"
+    ></app-shopping-edit>
     <hr>
     <ul class="list-group">
       <a href="#" class="list-group-item" style="cursor: pointer;"
-        *ngFor="let ingredient of ingredients"
+        *ngFor="let ingredient of ingredients; let i=index"
+        [ngStyle]="{backgroundColor: ingredient.selected ? '#518ef0': 'white', color: ingredient.selected ? 'white': 'black'}"
+        (click)="onSelectHandler(i)"
       >
        {{ ingredient.name }}  ({{ ingredient.amount }})
     </a>
